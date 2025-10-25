@@ -12,7 +12,6 @@ export type SectionSlug =
   | "all"
   | "kerala"
   | "india"
-  | "world"
   | "entertainment"
   | "subscriber-only";
 
@@ -107,18 +106,6 @@ const DEFINITIONS: Record<SectionSlug, SectionDefinition> = {
       pageSize: 36,
     },
   },
-  world: {
-    slug: "world",
-    title: "World",
-    description: "Geopolitics, diplomacy, and global affairs that shape tomorrow.",
-    fetch: {
-      type: "query",
-      query: '"world news" OR global politics OR international affairs',
-      label: "World",
-      pageSize: 36,
-      sortBy: "publishedAt",
-    },
-  },
   entertainment: {
     slug: "entertainment",
     title: "Entertainment",
@@ -149,7 +136,6 @@ const PRIMARY_NAV: NavLinkConfig[] = [
   { label: "News", slug: "news" },
   { label: "Kerala", slug: "kerala" },
   { label: "India", slug: "india" },
-  { label: "World", slug: "world" },
   { label: "Business", slug: "business" },
   { label: "Sport", slug: "sport" },
   { label: "Technology", slug: "technology" },
@@ -157,7 +143,6 @@ const PRIMARY_NAV: NavLinkConfig[] = [
   { label: "Science", slug: "science" },
   { label: "Culture", slug: "culture" },
   { label: "Entertainment", slug: "entertainment" },
-  { label: "Opinion", slug: "opinion" },
   { label: "Subscriber Only", slug: "subscriber-only" },
 ];
 

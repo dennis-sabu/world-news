@@ -1,12 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { NormalizedArticle } from "@/lib/newsApi";
+import { useState } from "react";
 
 type HeroSectionProps = {
   article: NormalizedArticle | null;
 };
 
 export function HeroSection({ article }: HeroSectionProps) {
+  const [imageError, setImageError] = useState(false);
+
   if (!article) {
     return (
       <article className="grid gap-6 rounded border border-dashed border-neutral-200 p-6 text-sm text-neutral-500">
@@ -22,7 +27,7 @@ export function HeroSection({ article }: HeroSectionProps) {
         className="relative block overflow-hidden rounded bg-neutral-200"
         style={{ aspectRatio: "4 / 3" }}
       >
-        {article.imageUrl ? (
+        {article.imageUrl && !imageError ? (
           <Image
             src={article.imageUrl}
             alt={article.title}
@@ -30,6 +35,7 @@ export function HeroSection({ article }: HeroSectionProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
             className="object-cover"
             priority={true}
+            onError={() => setImageError(true)}
           />
         ) : (
           <div className="flex h-full items-center justify-center">

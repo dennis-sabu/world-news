@@ -21,34 +21,28 @@ export default async function IndiaPage() {
   const publicationDate = todayFormatter.format(new Date());
   const primaryNav = buildPrimaryNav("india");
 
-  // Fetch India news from RSS feeds
+  // Fetch India-specific news from RSS feeds
   const [
+    indiaNews,
     generalNews,
     sportsNews,
     businessNews,
     techNews,
-    healthNews,
-    scienceNews,
-    entertainmentNews,
   ] = await Promise.all([
-    getSectionArticles({ type: "rss", category: "general", label: "General", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "sports", label: "Sports", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "business", label: "Business", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "technology", label: "Technology", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "health", label: "Health", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "science", label: "Science", pageSize: 100 }),
-    getSectionArticles({ type: "rss", category: "entertainment", label: "Entertainment", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "india", label: "India", pageSize: 150 }),
+    getSectionArticles({ type: "rss", category: "general", label: "General", pageSize: 50 }),
+    getSectionArticles({ type: "rss", category: "sports", label: "Sports", pageSize: 50 }),
+    getSectionArticles({ type: "rss", category: "business", label: "Business", pageSize: 50 }),
+    getSectionArticles({ type: "rss", category: "technology", label: "Technology", pageSize: 50 }),
   ]);
 
-  // Combine all articles
+  // Combine all articles (prioritize India-specific news)
   const allArticles = [
+    ...indiaNews,
     ...generalNews,
     ...sportsNews,
     ...businessNews,
     ...techNews,
-    ...healthNews,
-    ...scienceNews,
-    ...entertainmentNews,
   ];
 
   const [heroArticle, ...rest] = allArticles;

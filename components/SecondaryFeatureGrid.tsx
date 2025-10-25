@@ -1,12 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { NormalizedArticle } from "@/lib/newsApi";
+import { useState } from "react";
 
 type SecondaryFeatureGridProps = {
   features: NormalizedArticle[];
 };
 
 export function SecondaryFeatureGrid({ features }: SecondaryFeatureGridProps) {
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+
   if (!features.length) {
     return null;
   }
@@ -20,7 +25,7 @@ export function SecondaryFeatureGrid({ features }: SecondaryFeatureGridProps) {
           className="group"
         >
           <div className="relative h-48 w-full overflow-hidden rounded bg-neutral-200 transition-transform group-hover:scale-[1.01] sm:h-56">
-            {feature.imageUrl ? (
+            {feature.imageUrl && !imageErrors[index] ? (
               <Image
                 src={feature.imageUrl}
                 alt={feature.title}
@@ -29,6 +34,7 @@ export function SecondaryFeatureGrid({ features }: SecondaryFeatureGridProps) {
                 className="object-cover"
                 loading={index < 3 ? "eager" : "lazy"}
                 priority={index < 3}
+                onError={() => setImageErrors(prev => ({ ...prev, [index]: true }))}
               />
             ) : (
               <div className="flex h-full items-center justify-center">

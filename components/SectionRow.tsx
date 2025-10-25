@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export type SectionPrimaryStory = {
   category: string;
@@ -39,6 +42,10 @@ export type SectionRowProps = {
 };
 
 export function SectionRow({ title, primary, secondary, list }: SectionRowProps) {
+  const [primaryImageError, setPrimaryImageError] = useState(false);
+  const [secondaryImageError, setSecondaryImageError] = useState(false);
+  const [listImageErrors, setListImageErrors] = useState<Record<number, boolean>>({});
+
   return (
     <section className="border-t border-neutral-200 pt-8 sm:pt-12">
       <h2 className="mb-4 font-serif text-xl font-bold tracking-tight text-neutral-900 sm:mb-6 sm:text-2xl lg:text-3xl">
@@ -48,7 +55,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
         <div className="space-y-4 sm:space-y-6">
           <Link href={primary.href} className="block">
             <div className="relative overflow-hidden rounded bg-neutral-200" style={{ aspectRatio: "4 / 3" }}>
-              {primary.imageUrl ? (
+              {primary.imageUrl && !primaryImageError ? (
                 <Image
                   src={primary.imageUrl}
                   alt={primary.title}
@@ -56,6 +63,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover"
                   priority={true}
+                  onError={() => setPrimaryImageError(true)}
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
@@ -101,7 +109,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
               {secondary.summary}
             </p>
             <div className="relative mt-4 hidden overflow-hidden rounded bg-neutral-200 sm:block" style={{ aspectRatio: "4 / 3" }}>
-              {secondary.imageUrl ? (
+              {secondary.imageUrl && !secondaryImageError ? (
                 <Image
                   src={secondary.imageUrl}
                   alt={secondary.title}
@@ -109,6 +117,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
                   loading="lazy"
+                  onError={() => setSecondaryImageError(true)}
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
@@ -131,14 +140,14 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
             Latest in {title}
           </span>
           <div className="space-y-4">
-            {list.map((item) => (
+            {list.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className="group flex items-start gap-4 border-b border-neutral-200 pb-4 last:border-none"
               >
                 <div className="relative mt-1 h-16 w-16 shrink-0 overflow-hidden rounded bg-neutral-200" style={{ aspectRatio: "1 / 1" }}>
-                  {item.imageUrl ? (
+                  {item.imageUrl && !listImageErrors[index] ? (
                     <Image
                       src={item.imageUrl}
                       alt={item.title}
@@ -146,6 +155,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
                       sizes="64px"
                       className="object-cover"
                       loading="lazy"
+                      onError={() => setListImageErrors(prev => ({ ...prev, [index]: true }))}
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">

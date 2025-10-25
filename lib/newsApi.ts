@@ -34,6 +34,15 @@ const RSS_FEEDS: Record<string, string[]> = {
     "https://rss.cnn.com/rss/edition_entertainment.rss",
     "http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml",
   ],
+  kerala: [
+    "https://www.thehindu.com/news/national/kerala/feeder/default.rss",
+    "https://www.manoramaonline.com/news/kerala.rss",
+  ],
+  india: [
+    "https://www.thehindu.com/news/national/feeder/default.rss",
+    "https://timesofindia.indiatimes.com/rssfeeds/296589292.cms",
+    "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml",
+  ],
 };
 
 export type NormalizedArticle = {

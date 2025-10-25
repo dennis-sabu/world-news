@@ -18,10 +18,10 @@ export default async function KeralaPage() {
   const publicationDate = todayFormatter.format(new Date());
   const primaryNav = buildPrimaryNav("kerala");
 
-  // Fetch Kerala articles from RSS feeds
+  // Fetch Kerala-specific articles from RSS feeds
   const keralaArticles = await getSectionArticles({
     type: "rss",
-    category: "general",
+    category: "kerala",
     label: "Kerala",
     pageSize: 100,
   });

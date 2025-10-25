@@ -18,13 +18,30 @@ export default async function NewsPage() {
   const publicationDate = todayFormatter.format(new Date());
   const primaryNav = buildPrimaryNav("news");
 
-  // Fetch general news articles from RSS
-  const newsArticles = await getSectionArticles({
-    type: "rss",
-    category: "general",
-    label: "News",
-    pageSize: 100,
-  });
+  // Fetch India, Kerala, and international news
+  const [indiaArticles, keralaArticles, generalArticles] = await Promise.all([
+    getSectionArticles({
+      type: "rss",
+      category: "india",
+      label: "India",
+      pageSize: 30,
+    }),
+    getSectionArticles({
+      type: "rss",
+      category: "kerala",
+      label: "Kerala",
+      pageSize: 20,
+    }),
+    getSectionArticles({
+      type: "rss",
+      category: "general",
+      label: "News",
+      pageSize: 80,
+    }),
+  ]);
+
+  // Combine articles: India and Kerala first, then international
+  const newsArticles = [...indiaArticles, ...keralaArticles, ...generalArticles];
 
   const [heroArticle, ...rest] = newsArticles;
   const featureGrid = rest.slice(0, 6);
