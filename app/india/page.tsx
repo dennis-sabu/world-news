@@ -21,7 +21,7 @@ export default async function IndiaPage() {
   const publicationDate = todayFormatter.format(new Date());
   const primaryNav = buildPrimaryNav("india");
 
-  // Fetch comprehensive India news from multiple categories
+  // Fetch India news from RSS feeds
   const [
     generalNews,
     sportsNews,
@@ -30,16 +30,14 @@ export default async function IndiaPage() {
     healthNews,
     scienceNews,
     entertainmentNews,
-    indiaNews,
   ] = await Promise.all([
-    getSectionArticles({ type: "category", category: "general", country: "in", label: "General", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "sports", country: "in", label: "Sports", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "business", country: "in", label: "Business", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "technology", country: "in", label: "Technology", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "health", country: "in", label: "Health", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "science", country: "in", label: "Science", pageSize: 100 }),
-    getSectionArticles({ type: "category", category: "entertainment", country: "in", label: "Entertainment", pageSize: 100 }),
-    getSectionArticles({ type: "country", country: "in", label: "India", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "general", label: "General", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "sports", label: "Sports", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "business", label: "Business", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "technology", label: "Technology", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "health", label: "Health", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "science", label: "Science", pageSize: 100 }),
+    getSectionArticles({ type: "rss", category: "entertainment", label: "Entertainment", pageSize: 100 }),
   ]);
 
   // Combine all articles
@@ -51,7 +49,6 @@ export default async function IndiaPage() {
     ...healthNews,
     ...scienceNews,
     ...entertainmentNews,
-    ...indiaNews,
   ];
 
   const [heroArticle, ...rest] = allArticles;

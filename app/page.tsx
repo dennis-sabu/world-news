@@ -21,46 +21,46 @@ export default async function Home() {
   const publicationDate = todayFormatter.format(new Date());
   const primaryNav = buildPrimaryNav("news");
 
-  // Fetch international news from News API (without country filter for global news)
+  // Fetch international news from RSS feeds (no API key needed)
   const [generalNews, sportsNews, businessNews, techNews, healthNews, scienceNews, entertainmentNews] = await Promise.all([
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "general",
       label: "World News",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "sports",
       label: "Sports",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "business",
       label: "Business",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "technology",
       label: "Technology",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "health",
       label: "Health",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "science",
       label: "Science",
       pageSize: 100,
     }),
     getSectionArticles({
-      type: "category",
+      type: "rss",
       category: "entertainment",
       label: "Entertainment",
       pageSize: 100,

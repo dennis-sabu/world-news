@@ -125,7 +125,8 @@ function sanitizeImageUrl(url?: string | null): string | undefined {
 function ensureApiKey(): string {
   const key = process.env.NEWS_API_KEY;
   if (!key) {
-    throw new Error("Missing NEWS_API_KEY. Add it to .env.local to enable live news feeds.");
+    console.warn("NEWS_API_KEY not found, using RSS feeds only");
+    return "";
   }
   return key;
 }
@@ -184,6 +185,10 @@ async function fetchFromNewsApi(
   params: Record<string, string | number | undefined>,
 ): Promise<NewsApiArticle[]> {
   const apiKey = ensureApiKey();
+  if (!apiKey) {
+    console.warn("Skipping News API request - no API key");
+    return [];
+  }
   const query = buildQuery(params);
   const url = `${NEWS_API_BASE_URL}/${endpoint}?${query}`;
 
