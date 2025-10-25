@@ -7,6 +7,9 @@ import { InfiniteNewsFeed } from "@/components/InfiniteNewsFeed";
 import { buildPrimaryNav } from "@/lib/sections";
 import { getSectionArticles } from "@/lib/newsApi";
 
+// Revalidate every 10 minutes
+export const revalidate = 600;
+
 const todayFormatter = new Intl.DateTimeFormat("en-IN", {
   weekday: "short",
   month: "short",

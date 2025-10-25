@@ -13,7 +13,6 @@ export function SiteHeader({ dateLabel, primaryNav }: SiteHeaderProps) {
         <div className="mx-auto grid max-w-6xl gap-3 px-3 py-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500 sm:grid-cols-3 sm:gap-2 sm:px-4 sm:py-4 sm:text-[11px]">
           <div className="flex flex-wrap items-center gap-2 sm:justify-start sm:gap-3">
             <span>{dateLabel}</span>
-            <span className="hidden sm:inline">Thiruvananthapuram 28 C</span>
           </div>
           <div className="flex items-center justify-center text-center font-serif text-xl tracking-[0.25em] text-neutral-900 sm:text-2xl sm:tracking-[0.35em] lg:text-3xl">
             <Link href="/" className="transition-colors hover:text-red-600">

@@ -13,6 +13,13 @@ const nextConfig: NextConfig = {
       },
     ],
     unoptimized: true,
+    formats: ['image/webp', 'image/avif'],
+  },
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['@/components'],
   },
 };
 
