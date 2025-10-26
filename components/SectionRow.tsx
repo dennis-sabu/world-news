@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export type SectionPrimaryStory = {
   category: string;
@@ -45,6 +46,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
   const [primaryImageError, setPrimaryImageError] = useState(false);
   const [secondaryImageError, setSecondaryImageError] = useState(false);
   const [listImageErrors, setListImageErrors] = useState<Record<number, boolean>>({});
+  const { t } = useLanguage();
 
   return (
     <section className="border-t border-neutral-200 pt-8 sm:pt-12">
@@ -137,7 +139,7 @@ export function SectionRow({ title, primary, secondary, list }: SectionRowProps)
 
         <div className="space-y-4 border-neutral-200 lg:border-l lg:pl-6">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900">
-            Latest in {title}
+            {t("latestIn")} {title}
           </span>
           <div className="space-y-4">
             {list.map((item, index) => (

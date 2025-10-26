@@ -1,7 +1,17 @@
+"use client";
+
+import { useLanguage } from "@/lib/LanguageContext";
+
 export default function Loading() {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-neutral-50">
       <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="mb-8 text-center">
+          <p className="text-sm text-neutral-500">{t("loadingContent")}</p>
+        </div>
+        
         {/* Header skeleton */}
         <div className="mb-8 h-12 animate-pulse rounded bg-neutral-200" />
         

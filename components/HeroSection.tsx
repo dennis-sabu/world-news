@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { NormalizedArticle } from "@/lib/newsApi";
 import { useState } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 type HeroSectionProps = {
   article: NormalizedArticle | null;
@@ -11,11 +12,12 @@ type HeroSectionProps = {
 
 export function HeroSection({ article }: HeroSectionProps) {
   const [imageError, setImageError] = useState(false);
+  const { t } = useLanguage();
 
   if (!article) {
     return (
       <article className="grid gap-6 rounded border border-dashed border-neutral-200 p-6 text-sm text-neutral-500">
-        <p>Live headlines could not be loaded at the moment. Please try again soon.</p>
+        <p>{t("noContentAvailable")}</p>
       </article>
     );
   }
@@ -45,7 +47,7 @@ export function HeroSection({ article }: HeroSectionProps) {
           </div>
         )}
         <span className="absolute bottom-3 left-3 text-xs uppercase tracking-[0.2em] text-neutral-100 mix-blend-difference">
-          Lead photo
+          {t("leadPhoto")}
         </span>
       </Link>
 

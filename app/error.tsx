@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Error({
   error,
@@ -10,6 +11,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     console.error("Application error:", error);
   }, [error]);
@@ -19,10 +22,10 @@ export default function Error({
       <div className="w-full max-w-md space-y-6 text-center">
         <div className="space-y-2">
           <h1 className="font-serif text-4xl font-bold text-neutral-900">
-            Something went wrong
+            {t("errorTitle")}
           </h1>
           <p className="text-neutral-600">
-            We encountered an error while loading the news. Please try again.
+            {t("errorDescription")}
           </p>
         </div>
 
@@ -31,13 +34,13 @@ export default function Error({
             onClick={reset}
             className="rounded-full border-2 border-neutral-900 bg-neutral-900 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:bg-red-600 hover:border-red-600"
           >
-            Try Again
+            {t("tryAgain")}
           </button>
           <Link
             href="/"
             className="rounded-full border-2 border-neutral-900 bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:border-red-600 hover:text-red-600"
           >
-            Go Home
+            {t("goHome")}
           </Link>
         </div>
 

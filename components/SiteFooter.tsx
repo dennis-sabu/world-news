@@ -1,19 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function SiteFooter() {
+  const { t } = useLanguage();
+  
   return (
     <footer className="border-t border-neutral-200 bg-white">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-6 text-xs text-neutral-500 sm:flex-row sm:justify-between">
         <span>© {new Date().getFullYear()} The Malayalam Times</span>
         <div className="flex gap-4">
           <Link href="#" className="hover:text-red-600">
-            Privacy
+            {t("footerPrivacy")}
           </Link>
           <Link href="#" className="hover:text-red-600">
-            Terms
+            {t("footerTerms")}
           </Link>
           <Link href="#" className="hover:text-red-600">
-            Contact
+            {t("footerContact")}
           </Link>
         </div>
       </div>

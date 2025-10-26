@@ -4,6 +4,7 @@ import { SubscribersRail } from "@/components/SubscribersRail";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { InfiniteNewsFeed } from "@/components/InfiniteNewsFeed";
+import { NewsPageHeader } from "@/components/NewsPageHeader";
 import { buildPrimaryNav } from "@/lib/sections";
 import { getSectionArticles } from "@/lib/newsApi";
 
@@ -53,17 +54,7 @@ export default async function NewsPage() {
       <SiteHeader dateLabel={publicationDate} primaryNav={primaryNav} />
 
       <main className="mx-auto max-w-6xl px-4 py-10">
-        <header className="mb-10 space-y-4 border-b border-neutral-200 pb-8 text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
-            Top News
-          </span>
-          <h1 className="font-serif text-3xl font-bold leading-tight text-neutral-900 sm:text-4xl">
-            Breaking News
-          </h1>
-          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
-            Breaking stories and essential updates from India and the world.
-          </p>
-        </header>
+        <NewsPageHeader />
 
         <div className="grid gap-10 lg:grid-cols-[2fr_1fr]">
           <HeroSection article={heroArticle ?? null} />
